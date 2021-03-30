@@ -23,9 +23,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49497474"
-     inkscape:cx="1765.1964"
-     inkscape:cy="847.94011"
+     inkscape:zoom="0.24748737"
+     inkscape:cx="1850.1447"
+     inkscape:cy="1572.5786"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -53,13 +53,15 @@
     <path
        id="rect1173"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.914615;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 479.4668 1290.2383 L 479.4668 1516.0957 L 567.62305 1516.0957 L 567.62305 1350.8223 L 759.53125 1350.8223 L 759.53125 1516.0957 L 946.38867 1516.0957 L 946.38867 1351.6855 L 1138.2969 1351.6855 L 1138.2969 1516.0957 L 1229.1855 1516.0957 L 1229.1855 1290.2383 L 860.24414 1290.2383 L 860.24414 1401.3301 L 848.52734 1401.3301 L 848.52734 1290.2383 L 479.4668 1290.2383 z "
-       transform="scale(0.26458333)" />
+       d="m 479.4668,1290.2383 v 216.9093 l 7.42674,8.9481 h 80.72951 v -165.2734 h 191.9082 v 165.2734 h 186.85742 v -164.4102 h 191.90823 v 164.4102 h 85.7554 l 5.3857,-6.9277 -0.2525,-218.9297 H 860.24414 v 111.0918 h -11.7168 v -111.0918 z"
+       transform="scale(0.26458333)"
+       sodipodi:nodetypes="ccccccccccccccccccc" />
     <path
        id="rect1173-4"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.914597;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 539.21289 1625.0996 L 539.21289 1850.9551 L 605.2207 1850.9551 L 605.2207 1690.4766 L 747.31445 1690.4766 L 747.31445 1850.9551 L 812.36523 1850.9551 L 812.36523 1739.3574 L 824.08203 1739.3574 L 824.08203 1850.9551 L 890.38867 1850.9551 L 890.38867 1690.4766 L 1032.4844 1690.4766 L 1032.4844 1850.9551 L 1099.9551 1850.9551 L 1099.9551 1625.0996 L 539.21289 1625.0996 z "
-       transform="scale(0.26458333)" />
+       d="m 539.21289,1625.0996 v 220.9542 c 4.50173,4.9013 0,0 4.50173,4.9013 h 61.50608 v -160.4785 h 142.09375 v 160.4785 h 65.05078 v -111.5977 h 11.7168 v 111.5977 h 66.30664 v -160.4785 h 142.09573 v 160.4785 h 61.8013 l 5.6694,-5.5979 v -220.2576 z"
+       transform="scale(0.26458333)"
+       sodipodi:nodetypes="ccccccccccccccccccc" />
     <g
        id="panel1213"
        style="stroke-width:0.3;stroke-miterlimit:4;stroke-dasharray:none"
