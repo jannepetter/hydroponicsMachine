@@ -1,44 +1,57 @@
 int duty_cycle = 200; // Between 0 and 255, controls the motor speed
-int up_threshold = 640;
+int up_threshold = 500;
 int down_threshold_red = 400;
-int down_threshold_yellow = 580;
+int down_threshold_yellow = 600;
 int val_up;
 int val_down;
 unsigned long time_now = 0;
 unsigned long fill_moment = 0;
 String down = "down";
 String up = "up";
+int RED_LED = 8;
+int YELLOW_LED = 7;
+int MOTORPIN = 9;
+int UPSENSOR_OUT = 3;
+int DOWNSENSOR_OUT = 2;
+int UPSIGNALPIN = A0;
+int DOWNSIGNALPIN = A1;
+int loopcount = 0;
+int maxloopcount = 56;
+int interval = 90000;
 
 void setup() {
   // put your setup code here, to run once:
-  pinMode(9, OUTPUT); // PWD-control to the motor
-  pinMode(A0, INPUT); // Upper sensor
-  pinMode(A1, INPUT); // Lower sensor
-  pinMode(8, OUTPUT); // RED LED
-  pinMode(7, OUTPUT); // YELLOW LED
-  pinMode(3, OUTPUT); // For the upper sensor
-  pinMode(2, OUTPUT); // For the lower sensor
+  pinMode(MOTORPIN, OUTPUT); // PWD-control to the motor
+  pinMode(UPSIGNALPIN, INPUT); // Upper sensor
+  pinMode(DOWNSIGNALPIN, INPUT); // Lower sensor
+  pinMode(RED_LED, OUTPUT); // RED LED
+  pinMode(YELLOW_LED, OUTPUT); // YELLOW LED
+  pinMode(UPSENSOR_OUT, OUTPUT); // For the upper sensor
+  pinMode(DOWNSENSOR_OUT, OUTPUT); // For the lower sensor
   Serial.begin(115200);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  digitalWrite(3, HIGH);
+  digitalWrite(UPSENSOR_OUT, HIGH);
   delay(10);
-  val_up = analogRead(A0);
+  val_up = analogRead(UPSIGNALPIN);
   Serial.println(up + val_up);
   time_now = millis(); // time in milliseconds from the beginning of the program
-  if (val_up < up_threshold and (time_now - fill_moment) > 9000) {
-    analogWrite(9, duty_cycle);
-    while (val_up < up_threshold) {
+  if (val_up < up_threshold and (time_now - fill_moment) > interval) {
+    analogWrite(MOTORPIN, duty_cycle);
+    while (val_up < up_threshold and loopcount < maxloopcount){
       delay(250);
-      val_up = analogRead(A0);
+      val_up = analogRead(UPSIGNALPIN);
       Serial.println(up + val_up);
+      loopcount += 1;
     }
-    analogWrite(9, 0);
+    loopcount = 0;
+    analogWrite(MOTORPIN, 0);
+    time_now = millis();
     fill_moment = time_now;
   }
-  digitalWrite(3, LOW);
+  digitalWrite(UPSENSOR_OUT, LOW);
   
   if (fill_moment > time_now) {
     // millis() resets in about each 50 days
@@ -46,19 +59,19 @@ void loop() {
     fill_moment = time_now;
   }
 
-  digitalWrite(2, HIGH);
+  digitalWrite(DOWNSENSOR_OUT, HIGH);
   delay(10);
-  val_down = analogRead(A1);
-  digitalWrite(2, LOW);
+  val_down = analogRead(DOWNSIGNALPIN);
+  digitalWrite(DOWNSENSOR_OUT, LOW);
   Serial.println(down + val_down);
   if (val_down < down_threshold_red) {
-    digitalWrite(8, HIGH);
+    digitalWrite(RED_LED, HIGH);
     delay(1000);
-    digitalWrite(8, LOW);
+    digitalWrite(RED_LED, LOW);
   } else if (val_down > down_threshold_yellow) {
-    digitalWrite(7, HIGH);
+    digitalWrite(YELLOW_LED, HIGH);
     delay(1000);
-    digitalWrite(7, LOW);
+    digitalWrite(YELLOW_LED, LOW);
   }
   delay(980);
 }
