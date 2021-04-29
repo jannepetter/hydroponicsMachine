@@ -2,7 +2,7 @@
 int duty_cycle = 200; // Between 0 and 255, controls the motor speed
 int up_threshold = 500;
 int down_threshold_red = 400;
-int down_threshold_yellow = 520;
+int down_threshold_yellow = 590;
 int val_up;
 int val_down;
 
@@ -17,7 +17,11 @@ int DOWNSENSOR_OUT = 2;
 int UPSIGNALPIN = A0;
 int DOWNSIGNALPIN = A1;
 int loopcount = 0;
-int maxloopcount = 56;
+
+int restperiod= 40; // the time between pump action in seconds
+
+// tank overflow in 17s
+int maxloopcount = restperiod+16;
 
 
 void setup() {
@@ -45,10 +49,12 @@ void loop() {
   Serial.println(up + val_up);
   Serial.println(down + val_down);
   Serial.println(loopcount);
-  // 40 loops rest period (also seconds as one loop last 1s)
-  if (loopcount > 40) {
+  
+  // rest period over -> start the motor (one loop last 1s)
+  if (loopcount > restperiod) {
     analogWrite(MOTORPIN, duty_cycle);
   }
+  
   // cut motor power and reset count when sensor says so or reach maxloopcount as backup
   if (val_up > up_threshold || loopcount >= maxloopcount){
     loopcount=0;
@@ -57,12 +63,11 @@ void loop() {
 
    if (val_down < down_threshold_red) {
     digitalWrite(RED_LED, HIGH);
-  }
-  if (val_down > down_threshold_yellow) {
+  } else if (val_down > down_threshold_yellow) {
     digitalWrite(YELLOW_LED, HIGH);
   }
 
-  delay(480);
+  delay(490);
   digitalWrite(YELLOW_LED, LOW);
   digitalWrite(RED_LED, LOW);
   loopcount++;
